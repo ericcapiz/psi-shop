@@ -14,13 +14,12 @@ function App() {
 
   useEffect(()=>{
     fetchProducts();
-  },[])
+  },[]);
 
-  console.log(products);
   return (
-    <div>
+    <div className="app">
       <Navbar />
-     <Products />
+     <Products products={products} />
     </div>
   );
 }

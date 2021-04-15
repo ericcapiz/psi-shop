@@ -4,7 +4,7 @@ const drawerWidth = 0;
 
 export default makeStyles((theme) => ({
   appBar: {
-    boxShadow: 'none',
+    boxShadow: '0px 7px 4px 3px rgba(0,0,0,0.79)',
     borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
     backgroundColor: 'slategrey',
     [theme.breakpoints.up('sm')]: {
