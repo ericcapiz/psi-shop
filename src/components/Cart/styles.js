@@ -5,9 +5,13 @@ export default makeStyles((theme) => ({
   title: {
     marginTop: '5%',
   },
-  contain: {
+  content: {
+    flexGrow: 1,
     backgroundColor: '#7e8d9b',
+    padding: theme.spacing(3),
+    minHeight:'100vh',
   },
+  
   emptyButton: {
     minWidth: '150px',
     [theme.breakpoints.down('xs')]: {
