@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {commerce} from './lib/commerce';
 import Navbar from './components/Navbar/Navbar';
 import Products from './components/Products/Products';
@@ -31,11 +32,19 @@ function App() {
   console.log(cart);
 
   return (
-    <div className="app">
-      <Navbar totalItems={cart.total_items} />
-     {/* <Products onAddToCart={handleAddToCart} products={products} /> */}
-     <Cart cart={cart} />
-    </div>
+    <Router>
+      <div>
+        <Navbar totalItems={cart.total_items} />
+        <Switch>
+          <Route exact path="/">
+            <Products onAddToCart={handleAddToCart} products={products} />
+          </Route>
+          <Route exact path="/cart">
+            <Cart cart={cart} />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
