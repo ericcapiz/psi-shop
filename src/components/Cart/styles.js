@@ -5,6 +5,9 @@ export default makeStyles((theme) => ({
   title: {
     marginTop: '5%',
   },
+  contain: {
+    backgroundColor: '#7e8d9b',
+  },
   emptyButton: {
     minWidth: '150px',
     [theme.breakpoints.down('xs')]: {
@@ -16,6 +19,10 @@ export default makeStyles((theme) => ({
   },
   checkoutButton: {
     minWidth: '150px',
+    backgroundColor:'steelblue',
+    '&:hover':{
+      backgroundColor:'#87CEFA'
+    }
   },
   link: {
     textDecoration: 'none',
@@ -25,5 +32,6 @@ export default makeStyles((theme) => ({
     marginTop: '10%',
     width: '100%',
     justifyContent: 'space-between',
+    
   },
 }));
