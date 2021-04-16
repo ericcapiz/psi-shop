@@ -67,7 +67,7 @@ const AddressForm = ({checkoutToken, next}) => {
                         <FormInput name='firstName' label='First Name'/>
                         <FormInput name='lastName' label='Last Name'/>
                         <FormInput name='email' label='Email'/>
-                        <FormInput name='address' label='Address'/>
+                        <FormInput name='address1' label='Address'/>
                         <FormInput name='city' label='City' />
                         <FormInput name='zip' label='Zip / Postal Code'/>
                         <Grid item xs={12} sm={6}>
