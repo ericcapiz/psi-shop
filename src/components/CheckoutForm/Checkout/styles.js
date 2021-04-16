@@ -20,6 +20,9 @@ export default makeStyles((theme) => ({
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
+    boxShadow: '11px 15px 30px 4px rgba(0,0,0,0.75)',
+    webkitBoxShadow: '11px 15px 30px 4px rgba(0,0,0,0.75)',
+    mozBoxShadow: '11px 15px 30px 4px rgba(0,0,0,0.75)',
     [theme.breakpoints.down('xs')]: {
       width: '100%',
       marginTop: 60,
@@ -49,4 +52,5 @@ export default makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  
 }));

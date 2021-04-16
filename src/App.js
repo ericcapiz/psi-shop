@@ -48,7 +48,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div style={{backgroundColor: '#7e8d9b', height: '100vh'}}>
         <Navbar totalItems={cart.total_items} />
         <Switch>
           <Route exact path="/">
