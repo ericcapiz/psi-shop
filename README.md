@@ -2,7 +2,7 @@
 
 ![Project Image](https://i.ibb.co/wBwwW28/psi.png)
 
-> Psi-Shop is an ecommerce site that lets users add/remove from thier car and allows those items to be purchased.
+> Psi-Shop is an ecommerce site that lets users add/remove from thier cart and allows those items to be purchased.
 ---
 
 ### Table of Contents
