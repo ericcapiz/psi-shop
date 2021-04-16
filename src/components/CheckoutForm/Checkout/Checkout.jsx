@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import {Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button} from '@material-ui/core';
 import {commerce} from '../../../lib/commerce';
 import AddressForm from '../AddressForm';
@@ -20,7 +21,7 @@ const Checkout = ({cart, order, onCaptureCheckout, error}) => {
                 const token = await commerce.checkout.generateToken(cart.id, {type: 'cart'});
                 setCheckoutToken(token);
             } catch (error) {
-                
+                console.log(error)
             }
         }
         generateToken();
@@ -34,9 +35,29 @@ const Checkout = ({cart, order, onCaptureCheckout, error}) => {
         nextStep();
     }
 
-    const Confirmation = () => (
-        <div>Confirmation</div>
-    )
+    let Confirmation = () => order.customer ? (
+        <>
+            <div>
+                <Typography variant="h5">Thank-You For Your Purchase, {order.customer.firstname} {order.customer.lastname}</Typography>
+                <Divider className={classes.divider} />
+                <Typography variant="subtitle2">Order Ref: {order.customer_reference}</Typography>
+            </div>
+            <br />
+            <Button variant="outlined" component={Link} to="/" type="button">Shop Again</Button>
+        </>
+    ) : (
+        <div className={classes.spinner}>
+            <CircularProgress />
+        </div>
+    );
+
+    if(error) {
+        <>
+            <Typography variant="h5">Error: {error}</Typography>
+            <br />
+            <Button variant="outlined" component={Link} to="/" type="button">Back to Home</Button>
+        </>
+    }
 
     const Form = () => activeStep === 0 ? <AddressForm next={next}  checkoutToken={checkoutToken} /> : <PaymentForm nextStep={nextStep} backStep={backStep} checkoutToken={checkoutToken} shippingData={shippingData} onCaptureCheckout={onCaptureCheckout} />
 
