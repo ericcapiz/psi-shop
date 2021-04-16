@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import {Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button} from '@material-ui/core';
+import {Link, useHistory} from 'react-router-dom';
+import {Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button, CssBaseline} from '@material-ui/core';
 import {commerce} from '../../../lib/commerce';
 import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
@@ -12,7 +12,9 @@ const Checkout = ({cart, order, onCaptureCheckout, error}) => {
     const [activeStep, setActiveStep] = useState(0);
     const [checkoutToken, setCheckoutToken] = useState(null);
     const [shippingData, setShippingData] = useState({});
+    const [isFinished, setisFinished] = useState(false);
     const classes = useStyles();
+    const history = useHistory();
 
     //checkout token generate function - when user enters checkout component, token is generated
     useEffect(()=>{
@@ -21,7 +23,7 @@ const Checkout = ({cart, order, onCaptureCheckout, error}) => {
                 const token = await commerce.checkout.generateToken(cart.id, {type: 'cart'});
                 setCheckoutToken(token);
             } catch (error) {
-                console.log(error)
+                history.push('/');
             }
         }
         generateToken();
@@ -35,10 +37,26 @@ const Checkout = ({cart, order, onCaptureCheckout, error}) => {
         nextStep();
     }
 
+    const timeout = () =>{
+        setTimeout(() => {
+            setisFinished(true)
+        },3000);
+    }
+
     let Confirmation = () => order.customer ? (
         <>
             <div>
                 <Typography variant="h5">Thank-You For Your Purchase, {order.customer.firstname} {order.customer.lastname}</Typography>
+                <Divider className={classes.divider} />
+                <Typography variant="subtitle2">Order Ref: {order.customer_reference}</Typography>
+            </div>
+            <br />
+            <Button variant="outlined" component={Link} to="/" type="button">Shop Again</Button>
+        </>
+    ) : isFinished ? (
+        <>
+            <div>
+                <Typography variant="h5">Thank-You For Your Purchase!</Typography>
                 <Divider className={classes.divider} />
                 <Typography variant="subtitle2">Order Ref: {order.customer_reference}</Typography>
             </div>
@@ -59,10 +77,12 @@ const Checkout = ({cart, order, onCaptureCheckout, error}) => {
         </>
     }
 
-    const Form = () => activeStep === 0 ? <AddressForm next={next}  checkoutToken={checkoutToken} /> : <PaymentForm nextStep={nextStep} backStep={backStep} checkoutToken={checkoutToken} shippingData={shippingData} onCaptureCheckout={onCaptureCheckout} />
+    const Form = () => activeStep === 0 ? <AddressForm next={next}  checkoutToken={checkoutToken} /> : 
+    <PaymentForm nextStep={nextStep} timeout={timeout} backStep={backStep} checkoutToken={checkoutToken} shippingData={shippingData} onCaptureCheckout={onCaptureCheckout} />
 
     return (
         <>
+        <CssBaseline />
            <div className={classes.toolbar} />
            <main className={classes.layout}>
                <Paper className={classes.paper}>
