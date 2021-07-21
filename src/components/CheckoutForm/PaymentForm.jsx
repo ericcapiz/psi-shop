@@ -66,6 +66,11 @@ const PaymentForm = ({ timeout, nextStep, checkoutToken, shippingData, backStep,
                     )}
                 </ElementsConsumer>
             </Elements>
+            <p>To demo checkout, use stripe's demo payment card:</p>
+            <p>Card Number: 4242 4242 4242 4242</p>
+            <p>Exp: 0424</p>
+            <p>CVV: 242</p>
+            <p>ZIP: 42424</p>
         </>
     )
 }
